@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel-group col-sm-3 p-0 m-0" id="accordion">
+                <span class="btn btn-wide font-weight-bold rounded-0 w-100 p-0 sports_btn">Sports</span>
+                {% for g in games %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{ g.get_div }}">
+{#                                <a {% if not forloop.first %} class="collapsed" {% endif %} data-toggle="collapse" data-parent="#accordion" href="#{{ g.get_div }}" {% if forloop.first %} aria-expanded="true" {% endif %} >#}
+                                    {{ g.name }}
+                                </a>
+                            </h4>
+                        </div><!--/.panel-heading -->
+                        <div id="{{ g.get_div }}" class="panel-collapse collapse in ">
+{#                        <div id="{{ g.get_div }}" class="panel-collapse collapse in {% if forloop.first %} show {% endif %}">#}
+                            <div class="panel-body">
+                                <div class="panel-group" id="{{ g.get_div }}">
+
+                                    {% for com in g.competition_set.all %}
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="collapsed comp" comid="{{ com.com_id }}" data-toggle="collapse" data-parent="#{{ g.get_div }}" href="#{{ com.get_div }}">
+                                                        {{ com.name }}
+                                                    </a>
+                                                </h4>
+                                            </div><!--/.panel-heading -->
+                                            <div id="{{ com.get_div }}" class="panel-collapse collapse in ">
+                                                <div class="panel-body">
+                                                    {#                                                <a class="d-block" href="#">{{ com.name }}</a>#}
+                                                </div><!--/.panel-body -->
+                                            </div><!--/.panel-collapse -->
+                                        </div><!-- /.panel -->
+                                    {% endfor %}
+
+                                </div><!-- /.panel-group -->
+                            </div><!--/.panel-body -->
+                        </div><!--/.panel-collapse -->
+                    </div><!-- /.panel -->
+                {% empty %}
+                    <h6 CLASS="p-3">No sports available or API is not working.</h6>
+                {% endfor %}
+            </div><!-- /.panel-group -->
+
+            <div class="col-sm-9  mb-4 px-5 table_right">
+                <span class="d-block header_info mb-2 text-center page_title_game mx-auto"><strong>Please select match or outright from left to see data table.</strong></span>
+                <div class="mx-auto page_head" style="display: none;">
+
+                    <span class="d-block header_info header_item country"><strong>Country: </strong><span></span></span>
+                    <span class="d-block header_info header_item ht"><strong>Home team: </strong><span></span></span>
+                    <span class="d-block header_info header_item at"><strong>Away team: </strong><span></span></span>
+                    <span class="d-block header_info header_item tp"><strong>Start time: </strong><span></span></span>
+
+                </div>
+                <table class="mt-5 odds_table table">
+                    <tbody class="table_data">
+
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+
+
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function () {
+            $(".comp.collapsed").on('click', function () {
+                var id = $(this).attr('comid');
+                var targetdiv = $(this).attr('href');
+                $(targetdiv).find($(".panel-body")).text('Loading....');
+                $.ajax({
+                    url: 'um/' + id,
+                    type: 'GET',
+                    success: function (data) {
+                        items = data['matches'];
+                        country = data['country'];
+                        ComID = data['comid'];
+                        sport = data['sport'];
+                        league = data['league'];
+                        outrights = data['outrights'];
+                        outrightsarrString = outrights.join("| ");
+                        $(targetdiv).find($(".panel-body")).text('');
+                        i = 0;
+                        for (var M in items) {
+                            i++;
+                            arrString = items[M][3].join("| ");
+                            $(targetdiv).find($(".panel-body")).append('<span class="d-block match" league="' + league + '" sport="' + sport + '" competition_id="' + ComID + '" country="' + country + '" ht="' + items[M][0] + '" at="' + items[M][1] + '" tp="' + items[M][2] + '" oddsdata="' + arrString + '">' + M + '</span>')
+                        }
+                        if (i > 0) {
+                            if (outrightsarrString.length > 0) {
+                                $(targetdiv).find($(".panel-body")).append('<span class="d-block match outright" league="' + league + '" sport="' + sport + '" oddsdata="' + outrightsarrString + '">' + 'Outrights' + '</span>')
+                            }
+                        } else {
+                            $(targetdiv).find($(".panel-body")).append('No match found')
+                        }
+                    }
+                });
+            });
+            $(document).on('click', '.match', function () {
+                $('.match.active').removeClass('active');
+                $(this).addClass('active');
+                var top = $(this);
+                $(".page_title_game strong").text($(this).attr('league') + ' - ' + $(this).attr('sport'));
+                $(".country span").text($(this).attr('country'));
+                $(".ht span").text($(this).attr('ht'));
+                $(".at span").text($(this).attr('at'));
+                $(".tp span").text($(this).attr('tp'));
+                var t_data = $(this).attr('oddsdata').split('|');
+                $('.table_data').empty();
+
+                $.each(t_data, function (index, value) {
+                    if (top.hasClass('outright')) {
+                        $('.page_head').css('display', 'none');
+                        $('.table_data').append('<tr><td class="op">' + value.split(",")[0] + '</td><td>' + value.split(",")[1] + '</td> <td>' + value.split(",")[2] + '</td><td class="last_item">' + value.split(",")[3] + '</td></tr>')
+                    } else {
+                        $('.page_head').css('display', 'block');
+                        $('.table_data').append('<tr><td class="op">' + value.split(",")[0] + '</td><td>' + value.split(",")[1] + '</td> <td class="last_item">' + value.split(",")[2] + '</td></tr>')
+                    }
+                });
+                $('.odds_table').css('display', 'block');
+            });
+        });
+    </script>
+{% endblock %}

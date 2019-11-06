@@ -1,0 +1,147 @@
+.panel-group .panel-heading + .panel-collapse > .panel-body {
+    border: 1px solid #ddd;
+}
+
+.panel-group,
+.panel-group .panel,
+.panel-group .panel-heading,
+.panel-group .panel-heading a,
+.panel-group .panel-title,
+.panel-group .panel-title a,
+.panel-group .panel-body,
+.panel-group .panel-group .panel-heading + .panel-collapse > .panel-body {
+    border: 0;
+}
+
+.panel-group .panel-heading {
+    padding: 0;
+    margin-bottom: 0px;
+}
+
+.panel-group .panel-heading a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    position: relative;
+    font-size: 12px;
+    font-family: inherit;
+}
+
+.panel-group .panel-heading a.collapsed {
+    background: #eeeeee;
+    color: inherit;
+}
+
+.panel-group .panel-heading a[aria-expanded="true"] {
+    background: #668bb1;
+    color: #ffffff;
+}
+
+.panel-group .panel-heading a:after {
+    content: '-';
+    position: absolute;
+    right: 12px;
+    top: 0;
+    font-size: 18px;
+}
+
+.panel-group .panel-heading a.collapsed:after {
+    content: '+';
+}
+
+.panel-group .panel-heading a[aria-expanded="true"]:after {
+    content: '-';
+}
+
+.match {
+    color: #4d5388;
+    cursor: pointer;
+    font-family: monospace;
+    font-weight: bold;
+    border-bottom: 1px solid lightgray;
+}
+
+.panel-group .panel-collapse {
+    margin-top: 0 !important;
+}
+
+.panel-group .panel-body {
+    background: #ffffff;
+    padding: 15px;
+    font-size: 11px;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.panel-group .panel {
+    background: #eeeeee;
+}
+
+.panel-group .panel-body p:last-child,
+.panel-group .panel-body ul:last-child,
+.panel-group .panel-body ol:last-child {
+    margin-bottom: 0;
+}
+
+.panel-title {
+    margin: 0;
+}
+
+.panel-body a:hover {
+    text-decoration: none;
+}
+
+/*odds_table*/
+.page_title_game {
+    font-size: 16px !important;
+    border-bottom: 1px solid;
+    padding-bottom: 2px;
+}
+
+.page_head {
+    width: fit-content;
+    padding: 4px;
+}
+
+.header_info {
+    color: #4d5388;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+.match.active,
+.match:hover {
+    color: black;
+}
+
+/*.odds_table tr:first-child td {*/
+/*vertical-align: bottom;*/
+/*font-weight: bold;*/
+/*}*/
+.odds_table {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.table td, .table th {
+    padding: 0px 30px;
+    text-align: center;
+    font-size: 12px;
+    font-family: monospace;
+}
+
+.op {
+    text-align: left !important;
+    padding-left: 6px !important;
+}
+
+.last_item {
+    text-align: right !important;
+    padding-right: 6px !important;
+}
+
+.sports_btn {
+    border: 1px solid gainsboro;
+    color: #4f5d79;
+    border-bottom-color: black;
+}
