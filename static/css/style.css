@@ -112,30 +112,33 @@
 .match.active,
 .match:hover {
     color: black;
+    border-bottom-color: black;
 }
-
-/*.odds_table tr:first-child td {*/
-/*vertical-align: bottom;*/
-/*font-weight: bold;*/
-/*}*/
+.odds_table tr td:first-child,
+.odds_table tr:first-child td {
+font-weight: bold;
+}
 .odds_table {
     width: fit-content;
     margin: 0 auto;
 }
 
 .table td, .table th {
-    padding: 0px 30px;
+    padding: 0 30px;
     text-align: center;
     font-size: 12px;
     font-family: monospace;
+    border-top: 0;
+    border-bottom: 1px solid #dee2e6;;
 }
 
-.op {
+
+.odds_table tr td:first-child {
     text-align: left !important;
     padding-left: 6px !important;
 }
 
-.last_item {
+.odds_table tr td {
     text-align: right !important;
     padding-right: 6px !important;
 }

@@ -11,13 +11,13 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{ g.get_div }}">
-{#                                <a {% if not forloop.first %} class="collapsed" {% endif %} data-toggle="collapse" data-parent="#accordion" href="#{{ g.get_div }}" {% if forloop.first %} aria-expanded="true" {% endif %} >#}
+                                    {#                                <a {% if not forloop.first %} class="collapsed" {% endif %} data-toggle="collapse" data-parent="#accordion" href="#{{ g.get_div }}" {% if forloop.first %} aria-expanded="true" {% endif %} >#}
                                     {{ g.name }}
                                 </a>
                             </h4>
                         </div><!--/.panel-heading -->
                         <div id="{{ g.get_div }}" class="panel-collapse collapse in ">
-{#                        <div id="{{ g.get_div }}" class="panel-collapse collapse in {% if forloop.first %} show {% endif %}">#}
+                            {#                        <div id="{{ g.get_div }}" class="panel-collapse collapse in {% if forloop.first %} show {% endif %}">#}
                             <div class="panel-body">
                                 <div class="panel-group" id="{{ g.get_div }}">
 
@@ -118,10 +118,18 @@
                 $.each(t_data, function (index, value) {
                     if (top.hasClass('outright')) {
                         $('.page_head').css('display', 'none');
-                        $('.table_data').append('<tr><td class="op">' + value.split(",")[0] + '</td><td>' + value.split(",")[1] + '</td> <td>' + value.split(",")[2] + '</td><td class="last_item">' + value.split(",")[3] + '</td></tr>')
+                        $('.table_data').append('<tr></tr>');
+                        tditem = value.split(',');
+                        $.each(tditem, function (index, std) {
+                            $('.table_data tr:last').append('<td>' + std + '</td>');
+                        });
                     } else {
                         $('.page_head').css('display', 'block');
-                        $('.table_data').append('<tr><td class="op">' + value.split(",")[0] + '</td><td>' + value.split(",")[1] + '</td> <td class="last_item">' + value.split(",")[2] + '</td></tr>')
+                        $('.table_data').append('<tr></tr>');
+                        tditem = value.split(',');
+                        $.each(tditem, function (index, std) {
+                            $('.table_data tr:last').append('<td>' + std + '</td>');
+                        });
                     }
                 });
                 $('.odds_table').css('display', 'block');
