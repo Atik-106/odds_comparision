@@ -93,9 +93,11 @@
 
 /*odds_table*/
 .page_title_game {
-    font-size: 16px !important;
     border-bottom: 1px solid;
     padding-bottom: 2px;
+    background-image: linear-gradient(135deg, #667eea 0, #764ba2 100%) !important;
+    color: white !important;
+    margin-top: 3px;
 }
 
 .page_head {
@@ -106,7 +108,9 @@
 .header_info {
     color: #4d5388;
     font-family: monospace;
-    font-size: 13px;
+    font-weight: normal;
+    font-size: 13px !important;
+
 }
 
 .match.active,
@@ -131,7 +135,12 @@ font-weight: bold;
     border-top: 0;
     border-bottom: 1px solid #dee2e6;;
 }
-
+.odds_table tr:last-child td{
+    border-bottom: 0 !important;
+}
+.odds_table tr:nth-last-child(2) td{
+    border-bottom: 2px solid !important;
+}
 
 .odds_table tr td:first-child {
     text-align: left !important;
@@ -144,7 +153,16 @@ font-weight: bold;
 }
 
 .sports_btn {
-    border: 1px solid gainsboro;
-    color: #4f5d79;
-    border-bottom-color: black;
+    border: 1px solid black;
+    color: white;
+     background-image: linear-gradient(135deg, #667eea 0, #764ba2 100%) !important;
+    font-weight: normal;
+    font-size:13px;
+}
+.marker{
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-left: 3px;
+    color: white;
+    background-color: #59a69e;
 }
