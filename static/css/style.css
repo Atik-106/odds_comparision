@@ -166,3 +166,6 @@ font-weight: bold;
     color: white;
     background-color: #59a69e;
 }
+.market_title strong{
+    display: none;
+}

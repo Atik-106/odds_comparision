@@ -49,6 +49,7 @@
 
             <div class="col-sm-9  mb-4 px-5 table_right">
                 <span class="d-block header_info mb-2 text-center page_title_game mx-auto"><strong>Please select match or outright from left to see data table.</strong></span>
+                <span class="d-block header_info text-center market_title mx-auto"><strong class="mt-4">Market Name</strong></span>
                 <div class="mx-auto page_head" style="display: none;">
 
                     <span class="d-block header_info header_item country"><strong>Country: </strong><span></span></span>
@@ -57,7 +58,7 @@
                     <span class="d-block header_info header_item tp"><strong>Start time: </strong><span></span></span>
 
                 </div>
-                <table class="mt-5 odds_table table">
+                <table class="mt-4 odds_table table">
                     <tbody class="table_data">
 
                     </tbody>
@@ -119,6 +120,8 @@
                 $.each(t_data, function (index, value) {
                     if (top.hasClass('outright')) {
                         $('.page_head').css('display', 'none');
+                        $('.market_title strong').css('display', 'block');
+                        $('.market_title strong').text(top.text());
                         $('.table_data').append('<tr></tr>');
                         tditem = value.split(',');
                         $.each(tditem, function (index, std) {
@@ -126,6 +129,7 @@
                         });
                     } else {
                         $('.page_head').css('display', 'block');
+                        $('.market_title strong').css('display', 'none');
                         $('.table_data').append('<tr></tr>');
                         tditem = value.split(',');
                         $.each(tditem, function (index, std) {
