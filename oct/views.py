@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from django.http import JsonResponse
 from .models import *
 import requests
@@ -17,6 +17,10 @@ def homeview(request):
     }
     return render(request, 'home.html', data)
 
+
+def udpatesports(request):
+    update_games()
+    return redirect('home')
 
 def udpatematch(request,id):
     BMLIST = Bookmarker.objects.values_list('BMID','name')

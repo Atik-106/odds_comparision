@@ -5,8 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="panel-group col-sm-3 p-0 m-0" id="accordion">
-                <span class="btn btn-wide font-weight-bold rounded-0 w-100 p-0 sports_btn">Sports</span>
-                <span class="btn btn-wide font-weight-bold rounded-0 w-100 p-0 sports_btn">Update Sports</span>
+                <a href="{% url 'udpatesports' %}"><span class="btn btn-wide font-weight-bold rounded-0 w-100 p-0 sports_btn sports">Sports</span></a>
                 {% for g in games %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -95,10 +94,10 @@
                             $(targetdiv).find($(".panel-body")).append('<span class="d-block match" league="' + league + '" sport="' + sport + '" competition_id="' + ComID + '" country="' + country + '" ht="' + items[M][0] + '" at="' + items[M][1] + '" tp="' + items[M][2] + '" oddsdata="' + arrString + '">' + M + '</span>')
                         }
                         if (i > 0) {
-                             $(targetdiv).find($(".panel-body")).append('<span class="d-block outright marker" >' + 'Outrights' + '</span>');
-                                for (var K in outrights){
-                                    arrString = outrights[K].join("| ");
-                                    $(targetdiv).find($(".panel-body")).append('<span class="d-block match outright" league="' + league + '" sport="' + sport + '" oddsdata="' + arrString + '">' + K + '</span>')
+                            $(targetdiv).find($(".panel-body")).append('<span class="d-block outright marker" >' + 'Outrights' + '</span>');
+                            for (var K in outrights) {
+                                arrString = outrights[K].join("| ");
+                                $(targetdiv).find($(".panel-body")).append('<span class="d-block match outright" league="' + league + '" sport="' + sport + '" oddsdata="' + arrString + '">' + K + '</span>')
                             }
                         } else {
                             $(targetdiv).find($(".panel-body")).append('No match found')
@@ -139,6 +138,12 @@
                     }
                 });
                 $('.odds_table').css('display', 'block');
+            });
+            $(document).on('mouseover', '.sports', function () {
+                $('.sports').text('Update Sports')
+            });
+            $(document).on('mouseout', '.sports', function () {
+                $('.sports').text('Sports')
             });
         });
     </script>
