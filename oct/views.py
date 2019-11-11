@@ -10,7 +10,6 @@ from .tasks import *
 
 
 def homeview(request):
-    update_games()
     games = Game.objects.all()
     data = {
         'games': games,
