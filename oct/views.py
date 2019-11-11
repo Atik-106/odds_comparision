@@ -6,9 +6,11 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from datetime import timedelta
 from .models import *
+from .tasks import *
 
 
 def homeview(request):
+    update_games()
     games = Game.objects.all()
     data = {
         'games': games,
@@ -22,7 +24,7 @@ def udpatematch(request,id):
     BMLIST = [ list(item) for item in BMLIST]
     BMIDLIST = [item[0] for item in BMLIST]
     BMNAMELIST = [item[1] for item in BMLIST]
-    timestamp = round((datetime.now()-timedelta(minutes=30)).timestamp() * 1000)
+    timestamp = round((datetime.now()-timedelta(minutes=5)).timestamp() * 1000)
     session = requests.Session()
     session.trust_env = False
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'content-type': 'application/xhtml+xml'}
