@@ -58,6 +58,7 @@
                     <span class="d-block header_info header_item tp"><strong>Start time: </strong><span></span></span>
 
                 </div>
+
                 <table class="mt-4 odds_table table">
                     <tbody class="table_data">
 
@@ -85,22 +86,12 @@
                         ComID = data['comid'];
                         sport = data['sport'];
                         league = data['league'];
-                        outrights = data['outrights'];
                         $(targetdiv).find($(".panel-body")).text('');
                         i = 0;
                         for (var M in items) {
                             i++;
                             arrString = items[M][3].join("| ");
                             $(targetdiv).find($(".panel-body")).append('<span class="d-block match" league="' + league + '" sport="' + sport + '" competition_id="' + ComID + '" country="' + country + '" ht="' + items[M][0] + '" at="' + items[M][1] + '" tp="' + items[M][2] + '" oddsdata="' + arrString + '">' + M + '</span>')
-                        }
-                        if (i > 0) {
-                            $(targetdiv).find($(".panel-body")).append('<span class="d-block outright marker" >' + 'Outrights' + '</span>');
-                            for (var K in outrights) {
-                                arrString = outrights[K].join("| ");
-                                $(targetdiv).find($(".panel-body")).append('<span class="d-block match outright" league="' + league + '" sport="' + sport + '" oddsdata="' + arrString + '">' + K + '</span>')
-                            }
-                        } else {
-                            $(targetdiv).find($(".panel-body")).append('No match found')
                         }
                     }
                 });

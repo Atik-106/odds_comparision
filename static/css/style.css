@@ -112,11 +112,21 @@
     font-size: 16px !important;
 
 }
-
+.table td{
+    padding: 2px;
+}
 .match.active,
 .match:hover {
     color: black;
     border-bottom-color: black;
+}
+.odds_table tr:first-child td:first-child{
+    font-size: 12px;
+    margin: auto;
+    display: table-cell;
+    background: #7488B0;
+    color: white;
+    vertical-align: middle;
 }
 .odds_table tr td:first-child,
 .odds_table tr:first-child td {
